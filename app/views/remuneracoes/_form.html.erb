@@ -1,11 +1,11 @@
-<%= form_with(model: remuneracao) do |form| %>
+<%= form_with(model: remuneracao, local: true) do |form| %>
   <% if remuneracao.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(remuneracao.errors.count, "error") %> prohibited this remuneracao from being saved:</h2>
+      <h2>Confira os erros abaixo:</h2>
 
       <ul>
-        <% remuneracao.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% remuneracao.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
@@ -13,15 +13,15 @@
 
   <div class="field">
     <%= form.label :funcionario_id %>
-    <%= form.text_field :funcionario_id %>
+    <%= form.select(:funcionario_id, Funcionario.all.collect {|f| [f.nome, f.id]}) %>
   </div>
 
   <div class="field">
     <%= form.label :salario %>
-    <%= form.text_field :salario %>
+    <%= form.number_field :salario %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Salvar" %>
   </div>
 <% end %>

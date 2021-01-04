@@ -1,31 +1,33 @@
-<p id="notice"><%= notice %></p>
+<div class="content-wrapper container">
+  <p id="notice"><%= notice %></p>
 
-<h1>Turnos</h1>
+  <h1>Turnos</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Funcionario</th>
-      <th>Entrada</th>
-      <th>Saida</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @turnos.each do |turno| %>
+  <table class="table">
+    <thead>
       <tr>
-        <td><%= turno.funcionario_id %></td>
-        <td><%= turno.entrada %></td>
-        <td><%= turno.saida %></td>
-        <td><%= link_to 'Show', turno %></td>
-        <td><%= link_to 'Edit', edit_turno_path(turno) %></td>
-        <td><%= link_to 'Destroy', turno, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Funcionario</th>
+        <th>Entrada</th>
+        <th>Saida</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
+    <tbody>
+      <% @turnos.each do |turno| %>
+      <tr>
+        <td><%= turno.funcionario.nome %></td>
+        <td><%= turno.entrada.strftime("%d/%m/%Y %H:%M") %></td>
+        <td><%= turno.saida.strftime("%d/%m/%Y %H:%M") %></td>
+        <td><%= link_to 'Mostrar', turno %></td>
+        <td><%= link_to 'Editar', edit_turno_path(turno) %></td>
+        <td><%= link_to 'Apagar', turno, method: :delete, data: { confirm: 'Você tem certeza ??' } %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<%= link_to 'New Turno', new_turno_path %>
+  <br>
+
+  <%= link_to 'Novo', new_turno_path, class: "btn btn-primary" %>
+</div>

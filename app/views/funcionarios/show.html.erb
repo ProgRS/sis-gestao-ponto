@@ -1,9 +1,11 @@
-<p id="notice"><%= notice %></p>
+<div class="content-wrapper container">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Nome:</strong>
-  <%= @funcionario.nome %>
-</p>
+  <p>
+    <strong>Nome:</strong>
+    <%= @funcionario.nome %>
+  </p>
 
-<%= link_to 'Edit', edit_funcionario_path(@funcionario) %> |
-<%= link_to 'Back', funcionarios_path %>
+  <%= link_to 'Editar', edit_funcionario_path(@funcionario) %> |
+  <%= link_to 'Voltar', funcionarios_path %>
+</div>

@@ -1,11 +1,11 @@
-<%= form_with(model: turno) do |form| %>
+<%= form_with(model: turno, local: true) do |form| %>
   <% if turno.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(turno.errors.count, "error") %> prohibited this turno from being saved:</h2>
+      <h2>Confira os erros abaixo:</h2>
 
       <ul>
-        <% turno.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% turno.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
@@ -13,20 +13,20 @@
 
   <div class="field">
     <%= form.label :funcionario_id %>
-    <%= form.text_field :funcionario_id %>
+    <%= form.select(:funcionario_id, Funcionario.all.collect {|f| [f.nome, f.id]}) %>
   </div>
 
   <div class="field">
     <%= form.label :entrada %>
-    <%= form.datetime_select :entrada %>
+    <%= form.datetime_field :entrada %>
   </div>
 
   <div class="field">
     <%= form.label :saida %>
-    <%= form.datetime_select :saida %>
+    <%= form.datetime_field :saida %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Salvar" %>
   </div>
 <% end %>
