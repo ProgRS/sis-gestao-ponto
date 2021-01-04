@@ -5,6 +5,9 @@ class TurnosController < ApplicationController
   # GET /turnos.json
   def index
     @turnos = Turno.all
+    if params[:funcionario_id].present?
+      @turnos = @turnos.where(funcionario_id: params[:funcionario_id])
+    end
   end
 
   # GET /turnos/1
@@ -28,7 +31,7 @@ class TurnosController < ApplicationController
 
     respond_to do |format|
       if @turno.save
-        format.html { redirect_to @turno, notice: 'Turno was successfully created.' }
+        format.html { redirect_to @turno, notice: 'Turno foi criado com sucesso.' }
         format.json { render :show, status: :created, location: @turno }
       else
         format.html { render :new }
@@ -42,7 +45,7 @@ class TurnosController < ApplicationController
   def update
     respond_to do |format|
       if @turno.update(turno_params)
-        format.html { redirect_to @turno, notice: 'Turno was successfully updated.' }
+        format.html { redirect_to @turno, notice: 'Turno foi atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @turno }
       else
         format.html { render :edit }
@@ -56,7 +59,7 @@ class TurnosController < ApplicationController
   def destroy
     @turno.destroy
     respond_to do |format|
-      format.html { redirect_to turnos_url, notice: 'Turno was successfully destroyed.' }
+      format.html { redirect_to turnos_url, notice: 'Turno foi apagado com sucesso.' }
       format.json { head :no_content }
     end
   end
